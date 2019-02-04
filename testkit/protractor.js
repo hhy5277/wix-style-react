@@ -465,3 +465,8 @@ import { noBorderInputDriverFactory } from '../src/NoBorderInput/NoBorderInput.p
 export const noBorderInputTestkitFactory = protractorTestkitFactoryCreator(
   noBorderInputDriverFactory,
 );
+import { colorInputDriverFactory } from '../src/ColorInput/ColorInput.driver';
+
+export const colorInputTestkitFactory = protractorUniTestkitFactoryCreator(
+  colorInputDriverFactory,
+);
