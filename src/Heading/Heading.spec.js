@@ -1,20 +1,33 @@
 import React from 'react';
 import headingDriverFactory from './Heading.driver';
 import Heading from './Heading';
-import { createDriverFactory } from 'wix-ui-test-utils/driver-factory';
+import {
+  createRendererWithDriver,
+  createRendererWithUniDriver,
+  cleanup,
+} from '../../test/utils/react';
+import { headingUniDriverFactory } from './Heading.uni.driver';
 
 describe('Heading', () => {
-  const createDriver = createDriverFactory(headingDriverFactory);
+  afterEach(() => cleanup());
 
-  describe('light prop', () => {
+  describe('[async]', () => {
+    runTests(createRendererWithUniDriver(headingUniDriverFactory));
+  });
+
+  describe('[sync]', () => {
+    runTests(createRendererWithDriver(headingDriverFactory));
+  });
+
+  function runTests(render) {
     it('should be dark by default', async () => {
-      const driver = createDriver(<Heading>Hello</Heading>);
+      const { driver } = render(<Heading>Hello</Heading>);
       expect(await driver.isLight()).toBe(false);
     });
 
     it('should be light', async () => {
-      const driver = createDriver(<Heading light>Hello</Heading>);
+      const { driver } = render(<Heading light>Hello</Heading>);
       expect(await driver.isLight()).toBe(true);
     });
-  });
+  }
 });
