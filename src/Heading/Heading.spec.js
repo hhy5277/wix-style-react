@@ -7,14 +7,14 @@ describe('Heading', () => {
   const createDriver = createDriverFactory(headingDriverFactory);
 
   describe('light prop', () => {
-    it('should be dark by default', () => {
-      const wrapper = createDriver(<Heading>Hello</Heading>);
-      expect(wrapper.isLight()).toBe(false);
+    it('should be dark by default', async () => {
+      const driver = createDriver(<Heading>Hello</Heading>);
+      expect(await driver.isLight()).toBe(false);
     });
 
-    it('should be light', () => {
-      const wrapper = createDriver(<Heading light>Hello</Heading>);
-      expect(wrapper.isLight()).toBe(true);
+    it('should be light', async () => {
+      const driver = createDriver(<Heading light>Hello</Heading>);
+      expect(await driver.isLight()).toBe(true);
     });
   });
 });
