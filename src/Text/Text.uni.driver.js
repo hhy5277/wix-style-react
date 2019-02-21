@@ -1,16 +1,21 @@
-import { baseUniDriverFactory } from 'wix-ui-test-utils/base-driver';
-import { StylableUnidriverUtil } from '../../test/utils/unidriver/StylableUnidriverUtil';
+import {
+  baseUniDriverFactory,
+  StylableUnidriverUtil,
+  ReactBase,
+} from '../../test/utils/unidriver';
+
 import style from './Text.st.css';
-import textDriverFactory from './Text.driver';
-import { delegateToReactDOM } from '../../test/utils/unidriver/delegatMethod';
 
 export const textUniDriverFactory = base => {
   const stylableUtil = new StylableUnidriverUtil(style);
+  const reactBase = ReactBase(base);
 
   return {
     ...baseUniDriverFactory(base),
-    getTagName: () => delegateToReactDOM(base, 'getTagName', textDriverFactory),
-    getText: () => delegateToReactDOM(base, 'getText', textDriverFactory),
+    /** @ReactDOMOnly */
+    getTagName: async () => (await reactBase.tagName()).toLowerCase(),
+    /** @ReactDOMOnly */
+    getText: () => reactBase.innerHtml(),
     getSize: () => stylableUtil.getStyleState(base, 'size'),
     getSkin: () => stylableUtil.getStyleState(base, 'skin'),
     getWeight: () => stylableUtil.getStyleState(base, 'weight'),
