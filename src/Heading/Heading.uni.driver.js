@@ -15,20 +15,20 @@ export const headingUniDriverFactory = base => {
     /**
      * Get text content
      * @ReactDOMOnly
+     * @returns {string} innerHTML
      * */
     getText: () => reactBase.innerHtml(),
     /**
      * Get appearance
      * @ReactDOMOnly
-     * @return 'H1' | 'H2' | ...
+     * @returns {'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6' }
      * */
     getAppearance: () =>
       stylableUnidriverUtil.getStyleState(base, 'appearance'),
     /**
-     * Get light (boolean)
-     * @return boolean
-     * @ReactDOMOnly
-     * */
+     * Is light
+     * @returns { boolean }
+     */
     isLight: () => stylableUnidriverUtil.hasStyleState(base, 'light'),
   };
 };
