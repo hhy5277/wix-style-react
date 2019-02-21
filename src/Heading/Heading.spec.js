@@ -29,5 +29,15 @@ describe('Heading', () => {
       const { driver } = render(<Heading light>Hello</Heading>);
       expect(await driver.isLight()).toBe(true);
     });
+
+    it('should have text', async () => {
+      const { driver } = render(<Heading>Hello</Heading>);
+      expect(await driver.getText()).toBe('Hello');
+    });
+
+    it('should have appearance H1', async () => {
+      const { driver } = render(<Heading appearance="H1">Hello</Heading>);
+      expect(await driver.getAppearance()).toBe('H1');
+    });
   }
 });
