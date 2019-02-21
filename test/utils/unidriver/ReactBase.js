@@ -3,14 +3,14 @@ import { Simulate } from 'react-dom/test-utils';
 /**
  *Temporary workaround for implementing missing Unidriver methods in React/DOM only.
  *
- * @param {UniDriver} nativePromise
+ * @param {UniDriver} base
  */
-export function ReactBase(nativePromise) {
+export function ReactBase(base) {
   const htmlElement = () => {
-    if (nativePromise.type !== 'react') {
+    if (base.type !== 'react') {
       throw new Error('Supported only in React/DOM.');
     }
-    return nativePromise.getNative();
+    return base.getNative();
   };
 
   return {
