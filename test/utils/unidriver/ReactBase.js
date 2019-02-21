@@ -17,5 +17,7 @@ export function ReactBase(nativePromise) {
     pressKey: async key => Simulate.keyDown(await htmlElement(), { key }),
     tagName: async () => (await htmlElement()).tagName,
     innerHtml: async () => (await htmlElement()).innerHTML,
+    focus: async () => (await htmlElement()).focus(),
+    blur: async () => (await htmlElement()).blur(),
   };
 }
