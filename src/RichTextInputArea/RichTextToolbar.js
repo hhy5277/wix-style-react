@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { RichUtils } from '@wix/draft-js';
 
 import styles from './RichTextToolbar.scss';
@@ -7,7 +8,13 @@ import TextAreaBold from '../new-icons/system/TextAreaBold';
 import TextAreaItalic from '../new-icons/system/TextAreaItalic';
 import TextAreaUnderline from '../new-icons/system/TextAreaUnderline';
 
-const RichTextToolbar = ({ editorState, onBold, onItalic, onUnderline }) => {
+const RichTextToolbar = ({
+  className,
+  editorState,
+  onBold,
+  onItalic,
+  onUnderline,
+}) => {
   const buttons = [
     {
       toggledStyle: 'BOLD',
@@ -32,7 +39,7 @@ const RichTextToolbar = ({ editorState, onBold, onItalic, onUnderline }) => {
   };
 
   return (
-    <div>
+    <div className={classNames(className, styles.root)}>
       {buttons.map(button => {
         const { onClick, toggledStyle, icon: Icon } = button;
 
