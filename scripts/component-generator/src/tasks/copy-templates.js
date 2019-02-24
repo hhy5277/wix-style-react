@@ -7,6 +7,7 @@ const createValuesMap = require('../create-values-map');
 const createFileMap = ({ ComponentName, description, testComponent }) => {
   const filesToCopy = [
     'src/Component/Component.uni.driver.js',
+    'src/Component/Component.meta.js',
     'src/Component/Component.private.uni.driver.js',
     'src/Component/Component.e2e.js',
     'src/Component/Component.js',

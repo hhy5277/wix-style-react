@@ -99,6 +99,15 @@ class MyNewComponent extends React.PureComponent {
 
 export default MyNewComponent;
 ",
+  "src/MyNewComponent/MyNewComponent.meta.js": "import MyNewComponent from './MyNewComponent';
+import Registry from '@ui-autotools/registry';
+
+const metadata = Registry.getComponentMetadata(MyNewComponent);
+
+metadata.exportedFrom({
+  path: 'src/MyNewComponent/MyNewComponent.js',
+});
+",
   "src/MyNewComponent/MyNewComponent.private.uni.driver.js": "import { myNewComponentDriverFactory as publicDriverFactory } from './MyNewComponent.uni.driver';
 
 export const myNewComponentPrivateDriverFactory = base => {
@@ -323,6 +332,15 @@ class MyNewComponent extends React.PureComponent {
 }
 
 export default MyNewComponent;
+",
+  "src/MyNewComponent/MyNewComponent.meta.js": "import MyNewComponent from './MyNewComponent';
+import Registry from '@ui-autotools/registry';
+
+const metadata = Registry.getComponentMetadata(MyNewComponent);
+
+metadata.exportedFrom({
+  path: 'src/MyNewComponent/MyNewComponent.js',
+});
 ",
   "src/MyNewComponent/MyNewComponent.private.uni.driver.js": "import { myNewComponentDriverFactory as publicDriverFactory } from './MyNewComponent.uni.driver';
 
@@ -552,6 +570,15 @@ class MyTestComponent extends React.PureComponent {
 }
 
 export default MyTestComponent;
+",
+  "src/MyTestComponent/MyTestComponent.meta.js": "import MyTestComponent from './MyTestComponent';
+import Registry from '@ui-autotools/registry';
+
+const metadata = Registry.getComponentMetadata(MyTestComponent);
+
+metadata.exportedFrom({
+  path: 'src/MyTestComponent/MyTestComponent.js',
+});
 ",
   "src/MyTestComponent/MyTestComponent.private.uni.driver.js": "import { myTestComponentDriverFactory as publicDriverFactory } from './MyTestComponent.uni.driver';
 
