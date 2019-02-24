@@ -62,8 +62,8 @@ export const testkit = (base, body, document) => {
     getUnit: async () => await reactBase.textContent(),
     getTabIndex: async () => await reactBaseInput.tabIndex(),
     getReadOnly: async () => await reactBaseInput.readOnly(),
-    // getTextOverflow: async () =>
-    //   (await input).style['text-overflow'],
+    getTextOverflow: async () =>
+      (await reactBaseInput.getStyle())['text-overflow'],
     hasExclamation: async () => await base.$(`.${styles.exclamation}`).exists(),
     hasClass: async className =>
       (await base.attr('class')).indexOf(className) !== -1,

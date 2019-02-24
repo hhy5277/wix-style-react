@@ -31,5 +31,6 @@ export function ReactBase(base, document) {
     defaultValue: async () => (await htmlElement()).defaultValue,
     textContent: async () => (await htmlElement()).textContent,
     selectionStart: async () => (await htmlElement()).selectionStart,
+    getStyle: async () => (await htmlElement()).style
   };
 }

@@ -217,7 +217,7 @@ describe('Input', () => {
       });
     });
 
-    describe.skip('textOverflow attribute', () => { // todo
+    describe('textOverflow attribute', () => {
       it('should pass down to the wrapped input', async () => {
         const { driver } = render(<Input textOverflow="ellipsis" />);
         expect(await driver.getTextOverflow()).toBe('ellipsis');
