@@ -19,6 +19,11 @@ const RichTextToolbar = ({ editorState, onBold, onItalic, onUnderline }) => {
       onClick: onItalic,
       icon: TextAreaItalic,
     },
+    {
+      toggledStyle: 'UNDERLINE',
+      onClick: onUnderline,
+      icon: TextAreaUnderline,
+    },
   ];
 
   const toggleStyle = (event, onClick, toggledStyle) => {
