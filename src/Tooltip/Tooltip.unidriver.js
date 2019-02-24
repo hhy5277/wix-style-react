@@ -14,10 +14,11 @@ export const teskitTooltip = (base, body) => {
     return body.$(`[data-hook="${contentRootHook}"]`);
   };
 
+  const getTooltipContent = async () =>
+    await (await getContentRoot()).$('.tooltip');
+
   const hasContentClassName = async cls =>
-    new RegExp(cls).test(
-      await (await getContentRoot()).$('.tooltip').attr('class'),
-    );
+    new RegExp(cls).test(await (await getTooltipContent()).attr('class'));
 
   const getArrowPlacement = async () => {
     const classes = await (await getContentRoot())
@@ -34,7 +35,7 @@ export const teskitTooltip = (base, body) => {
         if (!(await getContentRoot()).exists()) {
           throw new Error('Tooltip not visible');
         }
-        const content = await (await getContentRoot()).$('.tooltip').text();
+        const content = await (await getTooltipContent()).text();
         await ReactBase(base).mouseLeave();
         return content;
       },
@@ -46,7 +47,7 @@ export const teskitTooltip = (base, body) => {
   };
 
   const getContentStyleValue = async value => {
-    const style = await (await getContentRoot()).$('.tooltip').attr('style');
+    const style = await (await getTooltipContent()).attr('style');
     return style.includes(value)
       ? style
           .split(';')
@@ -57,12 +58,13 @@ export const teskitTooltip = (base, body) => {
   };
 
   return {
+    exists: async () => !!(await base.getNative()),
     click: async () => await base.click(),
     focus: async () => await ReactBase(base).focus(),
     blur: async () => await ReactBase(base).blur(),
     isShown: async () => (await getContentRoot()).exists(),
     getTooltipWrapper: async () =>
-      await (await getContentRoot()).$('.tooltip').getNative(),
+      await (await getTooltipContent()).getNative(),
     mouseEnter: async () => await base.hover(base),
     mouseLeave: async () => await ReactBase(base).mouseLeave(),
     hasErrorTheme: async () => await hasContentClassName('error'),
@@ -70,8 +72,8 @@ export const teskitTooltip = (base, body) => {
     hasLightTheme: async () => await hasContentClassName('light'),
     hasAnimationClass: async () =>
       await (await getContentRoot()).$('.fadeIn').exists(),
-    getChildren: async () => await base.text(),
-    getContent: async () => await (await getContentRoot()).$('.tooltip').text(),
+    getChildren: async () => await ReactBase(base).innerHtml(),
+    getContent: async () => await (await getTooltipContent()).text(),
     getPlacement: async () => await getArrowPlacement(),
     getMaxWidth: async () => await getContentStyleValue('max-width'),
     getMinWidth: async () => await getContentStyleValue('min-width'),
@@ -79,10 +81,6 @@ export const teskitTooltip = (base, body) => {
     getPadding: async () => await getContentStyleValue('padding'),
     hasArrow: async () =>
       await (await getContentRoot()).$('[data-hook="tooltip-arrow"]').exists(),
-    getContentHook: async () =>
-      await body
-        .$(`[data-hook="${await base.attr('data-content-hook')}"]`)
-        .getNative(),
     hoverAndGetContent: async ({ timeout = 1000, interval = 50 } = {}) =>
       await hoverAndGetContent(timeout, interval),
   };
