@@ -24,7 +24,7 @@ If your component's `unidriver` is composing other components that don’t use u
 
 ## Public and Private drivers
 
-1. The **Public** drivers (`component.driver.js`) are the ones that exposed to the consumers of the components. They should be simple abstractions over common actions (for example, selecting the third element in the dropdown).
+1. The **Public** drivers (`component.uni.driver.js`) are the ones that exposed to the consumers of the components. They should be simple abstractions over common actions (for example, selecting the third element in the dropdown).
 2. The **Private** drivers (`component.driver.private.js`) are used for actions on a component that should not be exposed to the user. For example, asserting a class name existance on some component.
 3. The Private drivers are extending the public ones and should be used internally when testing the components.
 
