@@ -4,7 +4,7 @@ import { createUniDriverFactory } from 'wix-ui-test-utils/uni-driver-factory';
 import { enzymeUniTestkitFactoryCreator } from 'wix-ui-test-utils/enzyme';
 
 import DropdownBase from './DropdownBase';
-import { dropdownBasePrivateDriverFactory } from './DropdownBase.driver.private';
+import { dropdownBasePrivateDriverFactory } from './DropdownBase.private.driver';
 
 describe('DropdownBase', () => {
   const createDriver = createUniDriverFactory(dropdownBasePrivateDriverFactory);

@@ -10,7 +10,7 @@ import { genericModalLayoutTestkitFactory } from '../../testkit';
 import { genericModalLayoutTestkitFactory as enzymeGenericModalLayoutTestkitFactory } from '../../testkit/enzyme';
 
 import GenericModalLayout from '.';
-import genericModalLayoutPrivateDriverFactory from './GenericModalLayout.driver.private';
+import genericModalLayoutPrivateDriverFactory from './GenericModalLayout.private.driver';
 
 const renderWithProps = (properties = {}) => (
   <GenericModalLayout {...properties} />
