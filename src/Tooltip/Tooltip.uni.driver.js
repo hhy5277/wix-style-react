@@ -63,7 +63,7 @@ export const teskitTooltip = (base, body) => {
   };
 
   return {
-    exists: async () => !!(await base.getNative()),
+    exists: async () => base.exists(),
     click: async () => await base.click(),
     focus: async () => await ReactBase(base).focus(),
     blur: async () => await ReactBase(base).blur(),

@@ -10,7 +10,7 @@ import { buttonTestkitFactory } from '../../testkit';
 import Button from '../Button';
 
 import tooltipDriverFactory from './Tooltip.driver';
-import { teskitTooltip } from './Tooltip.unidriver';
+import { teskitTooltip } from './Tooltip.uni.driver';
 
 describe('Tooltip', () => {
   describe('[sync]', () => {
