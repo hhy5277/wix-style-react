@@ -175,9 +175,8 @@ describe('Tooltip', () => {
 
     it('should have a content', async () => {
       const { driver } = render(<Tooltip {..._props}>{children}</Tooltip>);
-      await driver.mouseEnter();
       await eventually(async () => {
-        expect(await driver.getContent()).toBe("I'm the content");
+        expect(await driver.hoverAndGetContent()).toBe("I'm the content");
       });
     });
 
@@ -672,7 +671,7 @@ describe('Tooltip', () => {
       });
     });
 
-    describe('enzyme testkit', () => {
+    describe('rerender tests', () => {
       it('should remove a tooltip immediately once the component is destroyed', async () => {
         const { driver } = render(
           <Tooltip {..._props} hideDelay={1000}>
@@ -684,7 +683,9 @@ describe('Tooltip', () => {
         cleanup();
         expect(await driver.isShown()).toBe(false);
       });
+    });
 
+    describe('fadeIn class tests', () => {
       it('should have fadeIn class and delay when showImmediately is unspecified', async () => {
         const { driver } = render(
           <Tooltip {..._props} content={<div>HELLO WORLD</div>}>

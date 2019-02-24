@@ -1,4 +1,5 @@
 import { ReactBase } from '../../test/utils/unidriver/ReactBase';
+import eventually from '../../test/utils/eventually';
 
 const arrowDirection = {
   top: 'bottom',
@@ -26,6 +27,24 @@ export const teskitTooltip = (base, body) => {
     return arrowDirection[classes.split(' ')[2]];
   };
 
+  const hoverAndGetContent = async (timeout, interval) => {
+    await base.hover(base);
+    return eventually(
+      async () => {
+        if (!(await getContentRoot()).exists()) {
+          throw new Error('Tooltip not visible');
+        }
+        const content = await (await getContentRoot()).$('.tooltip').text();
+        await ReactBase(base).mouseLeave();
+        return content;
+      },
+      {
+        timeout,
+        interval,
+      },
+    );
+  };
+
   const getContentStyleValue = async value => {
     const style = await (await getContentRoot()).$('.tooltip').attr('style');
     return style.includes(value)
@@ -45,7 +64,7 @@ export const teskitTooltip = (base, body) => {
     getTooltipWrapper: async () =>
       await (await getContentRoot()).$('.tooltip').getNative(),
     mouseEnter: async () => await base.hover(base),
-    mouseLeave: async () => (await ReactBase(base)).mouseLeave(),
+    mouseLeave: async () => await ReactBase(base).mouseLeave(),
     hasErrorTheme: async () => await hasClassName('error'),
     hasDarkTheme: async () => await hasClassName('dark'),
     hasLightTheme: async () => await hasClassName('light'),
@@ -64,5 +83,7 @@ export const teskitTooltip = (base, body) => {
       await body
         .$(`[data-hook="${await base.attr('data-content-hook')}"]`)
         .getNative(),
+    hoverAndGetContent: async ({ timeout = 1000, interval = 50 } = {}) =>
+      await hoverAndGetContent(timeout, interval),
   };
 };
