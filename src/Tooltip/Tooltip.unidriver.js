@@ -1,5 +1,4 @@
-import tooltipDriverFactory from './Tooltip.driver';
-import { delegateToReactDOM } from '../../test/utils/unidriver/delegatMethod';
+import { ReactBase } from '../../test/utils/unidriver/ReactBase';
 
 const arrowDirection = {
   top: 'bottom',
@@ -40,12 +39,13 @@ export const teskitTooltip = (base, body) => {
 
   return {
     click: async () => await base.click(),
+    focus: async () => await ReactBase(base).focus(),
+    blur: async () => await ReactBase(base).blur(),
     isShown: async () => (await getContentRoot()).exists(),
     getTooltipWrapper: async () =>
       await (await getContentRoot()).$('.tooltip').getNative(),
     mouseEnter: async () => await base.hover(base),
-    mouseLeave: () =>
-      delegateToReactDOM(base, 'mouseLeave', tooltipDriverFactory),
+    mouseLeave: async () => (await ReactBase(base)).mouseLeave(),
     hasErrorTheme: async () => await hasClassName('error'),
     hasDarkTheme: async () => await hasClassName('dark'),
     hasLightTheme: async () => await hasClassName('light'),

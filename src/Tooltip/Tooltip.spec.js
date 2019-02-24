@@ -96,7 +96,7 @@ describe('Tooltip', () => {
       expect(await buttonTestkit.getButtonTextContent()).toBe('Button content');
     });
 
-    it.skip('should not override focus event', async () => {
+    it('should not override focus event', async () => {
       const onFocus = jest.fn();
       const onFocusedChild = (
         <div onFocus={onFocus}>Here there is a children</div>
@@ -104,16 +104,16 @@ describe('Tooltip', () => {
       const { driver } = render(
         <Tooltip {..._props}>{onFocusedChild}</Tooltip>,
       );
-      driver.focus();
+      await driver.focus();
       expect(onFocus).toBeCalled();
     });
 
-    it.skip('should not override blur event', async () => {
+    it('should not override blur event', async () => {
       const onBlur = jest.fn();
       const onBluredChild = <div onBlur={onBlur}>Here there is a children</div>;
       const { driver } = render(<Tooltip {..._props}>{onBluredChild}</Tooltip>);
-      driver.blur();
-      expect(onBlur).toBeCalled();
+      await driver.blur();
+      expect(onBlur).toHaveBeenCalled();
     });
 
     it('should not override click event', async () => {
