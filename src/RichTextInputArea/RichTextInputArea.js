@@ -5,6 +5,7 @@ import { EditorState, RichContentEditor } from 'wix-rich-content-editor';
 import draftToHtml from 'draftjs-to-html';
 
 import styles from './RichTextInputArea.scss';
+import RichTextToolbar from './RichTextToolbar';
 
 class RichTextInputArea extends React.PureComponent {
   static displayName = 'RichTextInputArea';
@@ -35,6 +36,10 @@ class RichTextInputArea extends React.PureComponent {
 
     return (
       <div data-hook={dataHook} className={styles.root}>
+        <RichTextToolbar
+          editorState={this.state.editorState}
+          onBold={editorState => this.setState({ editorState })}
+        />
         <RichContentEditor
           editorState={this.state.editorState}
           onChange={this._onEditorChange}
