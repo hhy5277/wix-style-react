@@ -15,9 +15,9 @@ import {
 } from '../../test/utils/unit';
 import inputDriverFactory from './Input.driver';
 import { tooltipTestkitFactory } from '../../testkit';
-import { testkit } from './Input.unidriver';
+import { testkit } from './Input.uni.driver';
 import ReactTestUtils from 'react-dom/test-utils';
-import {ReactBase} from "../../test/utils/unidriver";
+import { ReactBase } from '../../test/utils/unidriver';
 
 describe('Input', () => {
   /* eslint-disable-next-line no-shadow */
@@ -36,7 +36,7 @@ describe('Input', () => {
       cleanup();
     });
     // todo: uncomment tooltip tests after tooltip unidriver is merged
-/*
+    /*
     describe('test tooltip', () => {
       it('should display the error tooltip on hover', async () => {
         const { driver } = render(
@@ -174,7 +174,6 @@ describe('Input', () => {
 
     describe('required attribute', () => {
       it('should pass down to the wrapped input', async () => {
-
         const { driver } = render(<Input required />);
         expect(await driver.getRequired()).toBeTruthy();
       });
@@ -218,7 +217,7 @@ describe('Input', () => {
       });
     });
 
-    describe('textOverflow attribute', () => {
+    describe.skip('textOverflow attribute', () => { // todo
       it('should pass down to the wrapped input', async () => {
         const { driver } = render(<Input textOverflow="ellipsis" />);
         expect(await driver.getTextOverflow()).toBe('ellipsis');
@@ -654,35 +653,34 @@ describe('Input', () => {
       });
     });
 
-    describe('clear method', () => { // todo1
+    describe('clear method', () => {
+      // todo1
 
       it('should call onChange when changing the value text', async () => {
         const spy = jest.fn();
-        const wrapper = mount(<Input value="" onChange={spy}/>)
-        const driver = inputDriverFactory({element: wrapper.getDOMNode()});
+        const wrapper = mount(<Input value="" onChange={spy} />);
+        const driver = inputDriverFactory({ element: wrapper.getDOMNode() });
         await driver.enterText('foo');
         expect(spy.mock.calls[0][0].target.value).toBe('foo');
       });
 
       it('should call onChange with empty value after calling clear', async () => {
         const spy = jest.fn();
-        const wrapper = mount(<Input value="foo" onChange={spy}/>)
-        const driver = inputDriverFactory({element: wrapper.getDOMNode()});
+        const wrapper = mount(<Input value="foo" onChange={spy} />);
+        const driver = inputDriverFactory({ element: wrapper.getDOMNode() });
         wrapper.instance().clear();
         expect(spy.mock.calls[0][0].target.value).toBe('');
       });
 
       it('should not call onChange calling clear with no value', async () => {
         const spy = jest.fn();
-        const wrapper = mount(<Input value="" onChange={spy}/>)
-        const driver = inputDriverFactory({element: wrapper.getDOMNode()});
+        const wrapper = mount(<Input value="" onChange={spy} />);
+        const driver = inputDriverFactory({ element: wrapper.getDOMNode() });
         wrapper.instance().clear();
         expect(spy.mock.calls.length).toBe(0);
       });
 
       it.skip('should fire onChange one time when onChange implementation fires clear', async () => {
-
-
         //controlled and uncontrolled
         //should call onChange when calling clear() for an input with some value
         //calling clear() when input is empty should not trigger onChange

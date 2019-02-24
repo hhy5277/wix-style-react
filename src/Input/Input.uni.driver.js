@@ -2,7 +2,7 @@ import { baseUniDriverFactory } from 'wix-ui-test-utils/base-driver';
 import styles from './Input.scss';
 import { ReactBase } from '../../test/utils/unidriver';
 
-export const testkit = (base,body,document) => {
+export const testkit = (base, body, document) => {
   const input = base.$('input');
 
   const reactBase = ReactBase(base, document);
@@ -20,8 +20,10 @@ export const testkit = (base,body,document) => {
     getName: async () => await input.attr('name'),
     getType: async () => await input.attr('type'),
     getAriaControls: async () => await input.attr('aria-controls'),
-    clickIconAffix: async () => await base.$(`[data-hook="icon-affix"]`).click(),
-    clickCustomAffix: async () => await base.$(`[data-hook="custom-affix"]`).click(),
+    clickIconAffix: async () =>
+      await base.$(`[data-hook="icon-affix"]`).click(),
+    clickCustomAffix: async () =>
+      await base.$(`[data-hook="custom-affix"]`).click(),
     isMenuArrowLast: async () => {
       const selector = `.${styles.suffixes} .${styles.suffix}:last-child > .${
         styles.menuArrow
@@ -38,8 +40,10 @@ export const testkit = (base,body,document) => {
     prefixComponentExists: async style =>
       (await base.$$(`.${styles.prefix} ${style}`).count()) === 1,
     hasPrefix: async () => (await base.$$(`.${styles.prefix}`).count()) === 1,
-    hasClearButton: async () => await base.$(`[data-hook=input-clear-button]`).exists(),
-    clickClear: async () => await base.$(`[data-hook=input-clear-button]`).click(),
+    hasClearButton: async () =>
+      await base.$(`[data-hook=input-clear-button]`).exists(),
+    clickClear: async () =>
+      await base.$(`[data-hook=input-clear-button]`).click(),
     getValue: async () => await input.value(),
     isOfStyle: async style =>
       (await driver.getRootElementClasses()).indexOf(
@@ -58,8 +62,8 @@ export const testkit = (base,body,document) => {
     getUnit: async () => await reactBase.textContent(),
     getTabIndex: async () => await reactBaseInput.tabIndex(),
     getReadOnly: async () => await reactBaseInput.readOnly(),
-    getTextOverflow: async () =>
-      (await input.getNative()).style['text-overflow'],
+    // getTextOverflow: async () =>
+    //   (await input).style['text-overflow'],
     hasExclamation: async () => await base.$(`.${styles.exclamation}`).exists(),
     hasClass: async className =>
       (await base.attr('class')).indexOf(className) !== -1,
