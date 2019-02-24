@@ -38,7 +38,9 @@ class RichTextInputArea extends React.PureComponent {
       <div data-hook={dataHook} className={styles.root}>
         <RichTextToolbar
           editorState={this.state.editorState}
-          onBold={editorState => this.setState({ editorState })}
+          onBold={this._setEditorState}
+          onItalic={this._setEditorState}
+          onUnderline={this._setEditorState}
         />
         <RichContentEditor
           editorState={this.state.editorState}
@@ -48,6 +50,8 @@ class RichTextInputArea extends React.PureComponent {
       </div>
     );
   }
+
+  _setEditorState = editorState => this.setState({ editorState });
 
   _onEditorChange = newEditorState => {
     this.setState({ editorState: newEditorState });
