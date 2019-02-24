@@ -351,6 +351,8 @@ class Input extends Component {
         ...event.target,
         value: '',
       };
+      //prevents the syntactic event from being nullified by React
+      event && event.persist && event.persist();
       this._onChange(event);
     }
 
