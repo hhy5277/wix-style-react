@@ -589,7 +589,7 @@ describe('Tooltip', () => {
         expect(contentHook1).toContain('firstDataHook');
 
         expect(
-          document.body.querySelector(`[data-hook="${contentHook1}"]`),
+          !!document.body.querySelector(`[data-hook="${contentHook1}"]`),
         ).toBe(true);
 
         await driver.mouseLeave();
@@ -610,7 +610,7 @@ describe('Tooltip', () => {
         expect(contentHook2).toContain('secondDataHook');
 
         expect(
-          document.body.querySelector(`[data-hook="${contentHook2}"]`),
+          !!document.body.querySelector(`[data-hook="${contentHook2}"]`),
         ).toBe(true);
       });
 
@@ -679,7 +679,7 @@ describe('Tooltip', () => {
             {children}
           </Tooltip>,
         );
-        driver.mouseEnter();
+        await driver.mouseEnter();
         await eventually(async () => expect(await driver.isShown()).toBe(true));
         cleanup();
         expect(await driver.isShown()).toBe(false);
@@ -691,8 +691,8 @@ describe('Tooltip', () => {
             {children}
           </Tooltip>,
         );
-        driver.mouseEnter();
-        return resolveIn(30).then(async () => {
+        await driver.mouseEnter();
+        await eventually(async () => {
           expect(await driver.hasAnimationClass()).toBe(true);
         });
       });
@@ -708,7 +708,7 @@ describe('Tooltip', () => {
           </Tooltip>,
         );
         driver.mouseEnter();
-        return resolveIn(30).then(async () => {
+        await eventually(async () => {
           expect(await driver.hasAnimationClass()).toBe(true);
         });
       });
@@ -719,29 +719,9 @@ describe('Tooltip', () => {
             {children}
           </Tooltip>,
         );
-        driver.mouseEnter();
+        await driver.mouseEnter();
         expect(await driver.hasAnimationClass()).toBe(false);
-      });
-    });
-
-    describe('assertExistsWrapper', () => {
-      it('should return exists false', async () => {
-        const { driver } = tooltipDriverFactory({ element: null });
-        expect(await driver.exists()).toBe(false);
-      });
-
-      it('should throw error', async () => {
-        const { driver } = tooltipDriverFactory({ element: null });
-        expect(() => driver.isShown()).toThrowError('Tooltip');
       });
     });
   }
 });
-
-function resolveIn(timeout) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve({});
-    }, timeout);
-  });
-}

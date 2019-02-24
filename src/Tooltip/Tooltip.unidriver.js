@@ -49,7 +49,8 @@ export const teskitTooltip = (base, body) => {
     hasErrorTheme: async () => await hasClassName('error'),
     hasDarkTheme: async () => await hasClassName('dark'),
     hasLightTheme: async () => await hasClassName('light'),
-    hasAnimationClass: async () => await hasClassName('.fadeIn'),
+    hasAnimationClass: async () =>
+      await (await getContentRoot()).$('.fadeIn').exists(),
     getChildren: async () => await base.text(),
     getContent: async () => await (await getContentRoot()).$('.tooltip').text(),
     getPlacement: async () => await getArrowPlacement(),
