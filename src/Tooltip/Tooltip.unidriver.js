@@ -11,6 +11,11 @@ const arrowDirection = {
 export const teskitTooltip = (base, body) => {
   const getContentRoot = async () => {
     const contentRootHook = await base.attr('data-content-hook');
+    if (!contentRootHook) {
+      throw new Error(
+        `Tooltip.driver: contentRootHook attribute must exist on the Tooltip's root element`,
+      );
+    }
     return body.$(`[data-hook="${contentRootHook}"]`);
   };
 
