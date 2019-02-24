@@ -14,7 +14,7 @@ export const teskitTooltip = (base, body) => {
     return body.$(`[data-hook="${contentRootHook}"]`);
   };
 
-  const hasClassName = async cls =>
+  const hasContentClassName = async cls =>
     new RegExp(cls).test(
       await (await getContentRoot()).$('.tooltip').attr('class'),
     );
@@ -65,9 +65,9 @@ export const teskitTooltip = (base, body) => {
       await (await getContentRoot()).$('.tooltip').getNative(),
     mouseEnter: async () => await base.hover(base),
     mouseLeave: async () => await ReactBase(base).mouseLeave(),
-    hasErrorTheme: async () => await hasClassName('error'),
-    hasDarkTheme: async () => await hasClassName('dark'),
-    hasLightTheme: async () => await hasClassName('light'),
+    hasErrorTheme: async () => await hasContentClassName('error'),
+    hasDarkTheme: async () => await hasContentClassName('dark'),
+    hasLightTheme: async () => await hasContentClassName('light'),
     hasAnimationClass: async () =>
       await (await getContentRoot()).$('.fadeIn').exists(),
     getChildren: async () => await base.text(),
