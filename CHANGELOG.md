@@ -14,7 +14,7 @@ Types of changes:
 1. **Docs** for documentation changes
 1. **Lab** components and features that are still in a work in progress
 
-## next
+## 6.6.0 - 2019-02-25
 
 ### Added
 - `<ColorPicker/>` - add feature to disable confirm button [#2998](https://github.com/wix/wix-style-react/pull/2998)
